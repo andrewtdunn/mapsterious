@@ -25,15 +25,19 @@ export class DatabaseStack extends Stack {
 
     const kmsKey = new aws_kms.Key(this, `mapsterious-kms-key-${this.account}`);
 
-    const db = new DatabaseInstanceFromSnapshot(this, ``, {
-      engine,
-      vpc: props!.vpc,
-      snapshotIdentifier,
-      credentials: SnapshotCredentials.fromGeneratedSecret("username", {
-        encryptionKey: kmsKey,
-        excludeCharacters: "!&*^#@()",
-      }),
-    });
+    const db = new DatabaseInstanceFromSnapshot(
+      this,
+      `mapsterious-db-${this.account}`,
+      {
+        engine,
+        vpc: props!.vpc,
+        snapshotIdentifier,
+        credentials: SnapshotCredentials.fromGeneratedSecret("username", {
+          encryptionKey: kmsKey,
+          excludeCharacters: "!&*^#@()",
+        }),
+      }
+    );
 
     new CfnOutput(this, "DB endpoint", { value: db.dbInstanceEndpointAddress });
   }
