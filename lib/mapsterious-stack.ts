@@ -20,7 +20,8 @@ export class MapsteriousStack extends cdk.Stack {
     super(scope, id, props);
 
     const pipeline = new CodePipeline(this, "Pipeline", {
-      pipelineName: "MapsteriousPipeline",
+      pipelineName: "mapsterious-pipeline",
+      crossAccountKeys: true,
       synth: new cdk.pipelines.CodeBuildStep("Synth", {
         input: CodePipelineSource.connection(
           `${GITHUB_ACCT}/${GITHUB_REPO}`,
@@ -31,7 +32,6 @@ export class MapsteriousStack extends cdk.Stack {
         ),
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
-      crossAccountKeys: true,
     });
 
     pipeline.addStage(
