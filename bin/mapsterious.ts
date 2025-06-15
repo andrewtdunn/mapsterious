@@ -9,3 +9,5 @@ new MapsteriousStack(app, "MapsteriousStack", {
     region: "us-east-1",
   },
 });
+
+app.synth();
