@@ -2,7 +2,11 @@ import { pipeline } from "stream";
 import * as cdk from "aws-cdk-lib";
 import { CodePipeline, CodePipelineSource } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
+import { MapsteriousStage } from "./mapsterious-stage";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
+
+const PROD_ACCOUNT = "471112703167";
+const PROD_REGION = "us-east-1";
 
 const GITHUB_ACCT = "andrewtdunn";
 const GITHUB_REPO = "mapsterious";
@@ -29,5 +33,14 @@ export class MapsteriousStack extends cdk.Stack {
       }),
       crossAccountKeys: true,
     });
+
+    pipeline.addStage(
+      new MapsteriousStage(this, "Prod", {
+        env: {
+          account: PROD_ACCOUNT,
+          region: PROD_REGION,
+        },
+      })
+    );
   }
 }
