@@ -9,6 +9,8 @@ export class NetworkStack extends Stack {
     super(scope, id, props);
 
     this.vpc = new Vpc(this, "VPC", {
+      vpcName: `mapsterious-vpc-${this.account}`,
+      natGateways: 1,
       maxAzs: 2,
     });
   }
