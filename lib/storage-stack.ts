@@ -40,7 +40,7 @@ export class StorageStack extends Stack {
           volumeType: EbsDeviceVolumeType.GENERAL_PURPOSE_SSD_GP3,
         },
         zoneAwareness: {
-          enabled: false,
+          enabled: true,
         },
         capacity: {
           multiAzWithStandbyEnabled: true,
