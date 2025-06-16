@@ -47,6 +47,7 @@ export class DatabaseStack extends Stack {
           InstanceClass.MEMORY5,
           InstanceSize.LARGE
         ),
+        allowMajorVersionUpgrade: true,
       }
     );
 
