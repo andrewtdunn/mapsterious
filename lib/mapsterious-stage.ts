@@ -3,6 +3,7 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { DatabaseStack } from "./database-stack";
 import { ComputeStack } from "./compute-stack";
+import { StorageStack } from "./storage-stack";
 
 export class MapsteriousStage extends cdk.Stage {
   constructor(scope: Construct, id: string, props?: cdk.StageProps) {
@@ -29,5 +30,15 @@ export class MapsteriousStage extends cdk.Stage {
       jumpboxSG: computeStack.jumpboxSG,
       description: "Contains database and security groups.",
     });
+
+    const storageStack = new StorageStack(
+      this,
+      `Storage-Stack-${this.account}`,
+      {
+        vpc: vpcStack.vpc,
+        env: props?.env,
+        description: "Contains opensearch domain and DMS storage bucket.",
+      }
+    );
   }
 }
