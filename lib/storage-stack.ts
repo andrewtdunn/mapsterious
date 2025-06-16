@@ -41,6 +41,7 @@ export class StorageStack extends Stack {
         },
         zoneAwareness: {
           enabled: true,
+          availabilityZoneCount: 3,
         },
         capacity: {
           multiAzWithStandbyEnabled: true,
