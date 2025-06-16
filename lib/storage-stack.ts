@@ -43,7 +43,7 @@ export class StorageStack extends Stack {
           enabled: false,
         },
         capacity: {
-          multiAzWithStandbyEnabled: false,
+          multiAzWithStandbyEnabled: true,
           masterNodes: 2,
           dataNodes: 2,
         },
