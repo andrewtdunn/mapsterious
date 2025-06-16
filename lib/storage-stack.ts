@@ -1,5 +1,5 @@
 import { Stack, StackProps } from "aws-cdk-lib";
-import { EbsDeviceVolumeType, Vpc } from "aws-cdk-lib/aws-ec2";
+import { EbsDeviceVolumeType, SubnetType, Vpc } from "aws-cdk-lib/aws-ec2";
 import { S3Bucket } from "aws-cdk-lib/aws-kinesisfirehose";
 import { Domain, EngineVersion } from "aws-cdk-lib/aws-opensearchservice";
 import { Bucket } from "aws-cdk-lib/aws-s3";
@@ -26,6 +26,11 @@ export class StorageStack extends Stack {
         version: EngineVersion.OPENSEARCH_2_19,
         enforceHttps: true,
         nodeToNodeEncryption: true,
+        vpcSubnets: [
+          {
+            subnetType: SubnetType.PUBLIC,
+          },
+        ],
         vpc: props.vpc,
         encryptionAtRest: {
           enabled: true,
