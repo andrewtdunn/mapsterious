@@ -27,13 +27,15 @@ export class StorageStack extends Stack {
         enforceHttps: true,
         nodeToNodeEncryption: true,
         vpc: props.vpc,
-        vpcSubnets: [{ subnets: props.vpc.privateSubnets }],
         encryptionAtRest: {
           enabled: true,
         },
         ebs: {
           volumeSize: 10,
           volumeType: EbsDeviceVolumeType.GENERAL_PURPOSE_SSD_GP3,
+        },
+        zoneAwareness: {
+          enabled: false,
         },
         capacity: {
           multiAzWithStandbyEnabled: false,
