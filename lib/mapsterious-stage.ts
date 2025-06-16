@@ -10,6 +10,7 @@ export class MapsteriousStage extends cdk.Stage {
 
     const vpcStack = new NetworkStack(this, `Network-Stack-${this.account}`, {
       env: props?.env,
+      description: "Contains custom VPC.",
     });
 
     const computeStack = new ComputeStack(
@@ -18,6 +19,7 @@ export class MapsteriousStage extends cdk.Stage {
       {
         vpc: vpcStack.vpc,
         env: props?.env,
+        description: "Contains Jumpbox and security groups.",
       }
     );
 
@@ -25,6 +27,7 @@ export class MapsteriousStage extends cdk.Stage {
       vpc: vpcStack.vpc,
       env: props?.env,
       jumpboxSG: computeStack.jumpboxSG,
+      description: "Contains database and security groups.",
     });
   }
 }
