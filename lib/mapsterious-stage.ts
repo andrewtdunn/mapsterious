@@ -2,6 +2,7 @@ import { NetworkStack } from "./network-stack";
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { DatabaseStack } from "./database-stack";
+import { ComputeStack } from "./compute-stack";
 
 export class MapsteriousStage extends cdk.Stage {
   constructor(scope: Construct, id: string, props?: cdk.StageProps) {
@@ -11,9 +12,19 @@ export class MapsteriousStage extends cdk.Stage {
       env: props?.env,
     });
 
+    const computeStack = new ComputeStack(
+      this,
+      `Compute-Stack-${this.account}`,
+      {
+        vpc: vpcStack.vpc,
+        env: props?.env,
+      }
+    );
+
     const dbStack = new DatabaseStack(this, `Database-Stack-${this.account}`, {
       vpc: vpcStack.vpc,
       env: props?.env,
+      jumpboxSG: computeStack.jumpboxSG,
     });
   }
 }
