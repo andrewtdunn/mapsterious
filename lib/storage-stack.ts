@@ -44,8 +44,8 @@ export class StorageStack extends Stack {
         },
         capacity: {
           multiAzWithStandbyEnabled: true,
-          masterNodes: 2,
-          dataNodes: 2,
+          masterNodes: 3,
+          dataNodes: 3,
         },
         fineGrainedAccessControl: {
           masterUserName: "mapsterious_admin",
