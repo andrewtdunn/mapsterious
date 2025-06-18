@@ -1,3 +1,3 @@
 # mapsterious
 
-Google Maps / Yelp / Wikipedia mashup
+A mashup of Google Maps, Yelp and Wikipedia.
