@@ -31,14 +31,14 @@ export class MapsteriousStage extends cdk.Stage {
       description: "Contains database and security groups.",
     });
 
-    const storageStack = new StorageStack(
-      this,
-      `Storage-Stack-${this.account}`,
-      {
-        vpc: vpcStack.vpc,
-        env: props?.env,
-        description: "Contains opensearch domain and DMS storage bucket.",
-      }
-    );
+    // const storageStack = new StorageStack(
+    //   this,
+    //   `Storage-Stack-${this.account}`,
+    //   {
+    //     vpc: vpcStack.vpc,
+    //     env: props?.env,
+    //     description: "Contains opensearch domain and DMS storage bucket.",
+    //   }
+    // );
   }
 }

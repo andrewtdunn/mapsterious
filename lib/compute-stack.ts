@@ -43,7 +43,6 @@ export class ComputeStack extends Stack {
     );
 
     this.jumpboxSG.connections.allowFrom(Peer.anyIpv4(), Port.tcp(22), "ssh");
-    this.jumpboxSG.connections.allowFrom(Peer.anyIpv4(), Port.tcp(5432), "pg");
 
     const jumpbox = new Instance(this, "jumpbox", {
       vpc: props.vpc,
