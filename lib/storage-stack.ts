@@ -14,11 +14,11 @@ export class StorageStack extends Stack {
   constructor(scope: Construct, id: string, props: StorageStackProps) {
     super(scope, id, props);
 
-    const s3 = new Bucket(this, `dms-storage-bucket-${this.account}`, {
-      bucketName: `dms-storage-bucket-${this.account}`,
-      enforceSSL: true,
-      versioned: true,
-    });
+    // const s3 = new Bucket(this, `dms-storage-bucket-${this.account}`, {
+    //   bucketName: `dms-storage-bucket-${this.account}`,
+    //   enforceSSL: true,
+    //   versioned: true,
+    // });
 
     const openSearchDomain = new Domain(
       this,
