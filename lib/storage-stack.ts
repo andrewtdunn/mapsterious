@@ -51,6 +51,12 @@ export class StorageStack extends Stack {
         fineGrainedAccessControl: {
           masterUserName: "mapsterious_admin",
         },
+        capacity: {
+          masterNodes: 1,
+          dataNodes: 1,
+          dataNodeInstanceType: "t3.small.search",
+          masterNodeInstanceType: "t3.small.search",
+        },
       }
     );
   }
