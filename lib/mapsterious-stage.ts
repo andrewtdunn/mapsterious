@@ -4,6 +4,7 @@ import { Construct } from "constructs";
 import { DatabaseStack } from "./database-stack";
 import { ComputeStack } from "./compute-stack";
 import { StorageStack } from "./storage-stack";
+import { MigrationStack } from "./migration-stack";
 
 export class MapsteriousStage extends cdk.Stage {
   constructor(scope: Construct, id: string, props?: cdk.StageProps) {
@@ -38,6 +39,20 @@ export class MapsteriousStage extends cdk.Stage {
         vpc: vpcStack.vpc,
         env: props?.env,
         description: "Contains opensearch domain and DMS storage bucket.",
+      }
+    );
+
+    const migrationStack = new MigrationStack(
+      this,
+      `MigrationStack-${this.account}`,
+      {
+        vpc: vpcStack.vpc,
+        database: dbStack.db,
+        jumpboxSG: computeStack.jumpboxSG,
+        description: "Contains DMS instance and migration task.",
+        openSearchDomain: storageStack.openSearchDomain,
+        databaseSG: dbStack.dbSG,
+        credentials: dbStack.dbCredentials,
       }
     );
   }
