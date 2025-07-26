@@ -1,6 +1,7 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import { EbsDeviceVolumeType, SubnetType, Vpc } from "aws-cdk-lib/aws-ec2";
 import { S3Bucket } from "aws-cdk-lib/aws-kinesisfirehose";
+import { Key } from "aws-cdk-lib/aws-kms";
 import { Domain, EngineVersion } from "aws-cdk-lib/aws-opensearchservice";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
@@ -31,7 +32,18 @@ export class StorageStack extends Stack {
           },
         ],
         vpc: props.vpc,
-
+        nodeToNodeEncryption: true,
+        enforceHttps: true,
+        encryptionAtRest: {
+          enabled: true,
+          kmsKey: new Key(
+            this,
+            `mapsterious-opensearch-kms-key-${this.account}`,
+            {
+              enableKeyRotation: true,
+            }
+          ),
+        },
         ebs: {
           volumeSize: 10,
           volumeType: EbsDeviceVolumeType.GENERAL_PURPOSE_SSD_GP3,
