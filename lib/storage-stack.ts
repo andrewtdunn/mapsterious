@@ -56,6 +56,7 @@ export class StorageStack extends Stack {
           dataNodes: 1,
           dataNodeInstanceType: "t3.small.search",
           masterNodeInstanceType: "t3.small.search",
+          multiAzWithStandbyEnabled: false,
         },
       }
     );
