@@ -63,8 +63,8 @@ export class DatabaseStack extends Stack {
           excludeCharacters: "!&*^#@()",
         }),
         instanceType: InstanceType.of(
-          InstanceClass.MEMORY5,
-          InstanceSize.LARGE
+          InstanceClass.BURSTABLE3,
+          InstanceSize.MICRO
         ),
         allowMajorVersionUpgrade: true,
       }
