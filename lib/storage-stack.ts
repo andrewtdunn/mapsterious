@@ -23,6 +23,7 @@ export class StorageStack extends Stack {
       this,
       `mapsterious-opensearch-domain-${this.account}`,
       {
+        domainName: "mapsterious",
         version: EngineVersion.OPENSEARCH_2_19,
         enforceHttps: true,
         nodeToNodeEncryption: true,
@@ -39,14 +40,10 @@ export class StorageStack extends Stack {
           volumeSize: 10,
           volumeType: EbsDeviceVolumeType.GENERAL_PURPOSE_SSD_GP3,
         },
-        zoneAwareness: {
-          enabled: true,
-          availabilityZoneCount: 3,
-        },
         capacity: {
-          multiAzWithStandbyEnabled: true,
-          masterNodes: 3,
-          dataNodes: 3,
+          multiAzWithStandbyEnabled: false,
+          masterNodes: 1,
+          dataNodes: 1,
         },
         fineGrainedAccessControl: {
           masterUserName: "mapsterious_admin",
