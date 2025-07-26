@@ -3,6 +3,7 @@ import { EbsDeviceVolumeType, SubnetType, Vpc } from "aws-cdk-lib/aws-ec2";
 import { S3Bucket } from "aws-cdk-lib/aws-kinesisfirehose";
 import { Key } from "aws-cdk-lib/aws-kms";
 import { Domain, EngineVersion } from "aws-cdk-lib/aws-opensearchservice";
+import { SubnetGroup } from "aws-cdk-lib/aws-rds";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
 
@@ -28,7 +29,7 @@ export class StorageStack extends Stack {
         version: EngineVersion.OPENSEARCH_2_19,
         vpcSubnets: [
           {
-            subnetType: SubnetType.PRIVATE_WITH_EGRESS,
+            subnets: [props.vpc.privateSubnets[0]],
           },
         ],
         vpc: props.vpc,
