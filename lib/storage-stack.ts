@@ -25,25 +25,16 @@ export class StorageStack extends Stack {
       {
         domainName: "mapsterious",
         version: EngineVersion.OPENSEARCH_2_19,
-        enforceHttps: true,
-        nodeToNodeEncryption: true,
         vpcSubnets: [
           {
-            subnetType: SubnetType.PUBLIC,
+            subnetType: SubnetType.PRIVATE_WITH_EGRESS,
           },
         ],
         vpc: props.vpc,
-        encryptionAtRest: {
-          enabled: true,
-        },
+
         ebs: {
           volumeSize: 10,
           volumeType: EbsDeviceVolumeType.GENERAL_PURPOSE_SSD_GP3,
-        },
-        capacity: {
-          multiAzWithStandbyEnabled: false,
-          masterNodes: 1,
-          dataNodes: 1,
         },
         fineGrainedAccessControl: {
           masterUserName: "mapsterious_admin",
