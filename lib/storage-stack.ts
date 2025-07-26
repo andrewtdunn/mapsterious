@@ -1,5 +1,6 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import { EbsDeviceVolumeType, SubnetType, Vpc } from "aws-cdk-lib/aws-ec2";
+import { AnyPrincipal, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { S3Bucket } from "aws-cdk-lib/aws-kinesisfirehose";
 import { Key } from "aws-cdk-lib/aws-kms";
 import { Domain, EngineVersion } from "aws-cdk-lib/aws-opensearchservice";
@@ -12,6 +13,8 @@ interface StorageStackProps extends StackProps {
 }
 
 export class StorageStack extends Stack {
+  public readonly openSearchDomain: Domain;
+
   constructor(scope: Construct, id: string, props: StorageStackProps) {
     super(scope, id, props);
 
@@ -21,11 +24,21 @@ export class StorageStack extends Stack {
     //   versioned: true,
     // });
 
-    const openSearchDomain = new Domain(
+    const domainName = "mapsterious";
+
+    const accessPolicy = new PolicyStatement({
+      actions: ["es:*"],
+      resources: [
+        `arn:aws:es:${this.region}:${this.account}:domain/${domainName}/*`,
+      ],
+      principals: [new AnyPrincipal()],
+    });
+
+    this.openSearchDomain = new Domain(
       this,
       `mapsterious-opensearch-domain-${this.account}`,
       {
-        domainName: "mapsterious",
+        domainName,
         version: EngineVersion.OPENSEARCH_2_19,
         vpcSubnets: [
           {
@@ -56,6 +69,7 @@ export class StorageStack extends Stack {
           dataNodeInstanceType: "t3.small.search",
           multiAzWithStandbyEnabled: false,
         },
+        accessPolicies: [accessPolicy],
       }
     );
   }
