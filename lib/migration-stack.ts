@@ -49,19 +49,6 @@ export class MigrationStack extends Stack {
       }
     );
 
-    const dmsRole = new Role(this, `earthyp-dms-role-${this.account}`, {
-      roleName: `dms-role-${this.account}`,
-      description: "DMS Role",
-      assumedBy: new ServicePrincipal("dms.amazonaws.com"),
-    });
-
-    dmsRole.addToPolicy(
-      new PolicyStatement({
-        actions: ["s3:*"],
-        resources: [bucket.bucketArn],
-      })
-    );
-
     const dmsSG = new SecurityGroup(
       this,
       `earthyp-dms-sg-${this.account}-${this.region}`,
