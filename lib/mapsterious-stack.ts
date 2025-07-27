@@ -20,7 +20,7 @@ export class MapsteriousStack extends cdk.Stack {
     super(scope, id, props);
 
     const pipeline = new CodePipeline(this, "Pipeline", {
-      pipelineName: "mapsterious-pipeline",
+      pipelineName: "mapsterious-pipeline-instance",
       crossAccountKeys: true,
       synth: new cdk.pipelines.CodeBuildStep("Synth", {
         input: CodePipelineSource.connection(

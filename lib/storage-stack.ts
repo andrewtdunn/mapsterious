@@ -24,7 +24,7 @@ export class StorageStack extends Stack {
     //   versioned: true,
     // });
 
-    const domainName = "mapsterious";
+    const domainName = "mapsterious-legacy";
 
     const accessPolicy = new PolicyStatement({
       actions: ["es:*"],
