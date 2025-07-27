@@ -74,7 +74,7 @@ export class MigrationStack extends Stack {
       this,
       `repl-inst-${this.account}-${this.region}`,
       {
-        replicationInstanceClass: "dms.t3.small",
+        replicationInstanceClass: "dms.t3.medium",
         replicationInstanceIdentifier: `replication-inst-${this.account}`,
         allocatedStorage: 50,
         engineVersion: "3.6.1",
