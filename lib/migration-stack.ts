@@ -39,19 +39,15 @@ export class MigrationStack extends Stack {
 
     const { vpc, database: db } = props;
 
-    const bucket = new Bucket(
-      this,
-      `earthyp-dms-storage-bucket-${this.account}`,
-      {
-        bucketName: `dms-storage-bucket-${this.account}`,
-        enforceSSL: true,
-        versioned: true,
-      }
-    );
+    const bucket = new Bucket(this, `dms-storage-bucket-${this.account}`, {
+      bucketName: `dms-storage-bucket-${this.account}`,
+      enforceSSL: true,
+      versioned: true,
+    });
 
     const dmsSG = new SecurityGroup(
       this,
-      `earthyp-dms-sg-${this.account}-${this.region}`,
+      `dms-sg-${this.account}-${this.region}`,
       {
         vpc,
       }
@@ -64,7 +60,7 @@ export class MigrationStack extends Stack {
 
     const replicationSubnetGroup = new CfnReplicationSubnetGroup(
       this,
-      `replication-subnet-gp-${this.account}`,
+      `repl-subnet-gp-${this.account}`,
       {
         subnetIds: vpc.selectSubnets({
           subnetType: SubnetType.PUBLIC,
@@ -76,7 +72,7 @@ export class MigrationStack extends Stack {
     // dms replication instance
     const replicationInstance = new CfnReplicationInstance(
       this,
-      `replication-inst-${this.account}-${this.region}`,
+      `repl-inst-${this.account}-${this.region}`,
       {
         replicationInstanceClass: "dms.t3.micro",
         replicationInstanceIdentifier: `replication-inst-${this.account}`,
