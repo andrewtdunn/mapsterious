@@ -44,7 +44,7 @@ export class MapsteriousStage extends cdk.Stage {
 
     const migrationStack = new MigrationStack(
       this,
-      `MigrationStack-${this.account}`,
+      `Migration-Stack-${this.account}`,
       {
         vpc: vpcStack.vpc,
         database: dbStack.db,
