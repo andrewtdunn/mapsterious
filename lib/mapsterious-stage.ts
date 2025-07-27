@@ -52,7 +52,6 @@ export class MapsteriousStage extends cdk.Stage {
         description: "Contains DMS instance and migration task.",
         openSearchDomain: storageStack.openSearchDomain,
         databaseSG: dbStack.dbSG,
-        credentials: dbStack.dbCredentials,
       }
     );
   }
