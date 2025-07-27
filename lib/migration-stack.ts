@@ -115,7 +115,7 @@ export class MigrationStack extends Stack {
       })
     );
 
-    // sqlserver endpoint
+    // postgres endpoint
     const pgEndpoint = new CfnEndpoint(
       this,
       `pgEndpoint-${this.account}-${this.region}`,
