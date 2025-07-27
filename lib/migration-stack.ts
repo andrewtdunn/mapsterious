@@ -70,7 +70,6 @@ export class MigrationStack extends Stack {
           subnetType: SubnetType.PUBLIC,
         }).subnetIds,
         replicationSubnetGroupDescription: "replication subnet group",
-        replicationSubnetGroupIdentifier: "replication-subnet-gp-id",
       }
     );
 
@@ -115,7 +114,7 @@ export class MigrationStack extends Stack {
       })
     );
 
-    // postgres endpoint
+    // sqlserver endpoint
     const pgEndpoint = new CfnEndpoint(
       this,
       `pgEndpoint-${this.account}-${this.region}`,
