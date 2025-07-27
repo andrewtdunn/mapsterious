@@ -49,19 +49,6 @@ export class MigrationStack extends Stack {
       }
     );
 
-    const dmsRole = new Role(this, `earthyp-dms-role-${this.region}`, {
-      roleName: `earthyp-dms-role-${this.region}`,
-      description: "DMS Role",
-      assumedBy: new ServicePrincipal("dms.amazonaws.com"),
-    });
-
-    dmsRole.addToPolicy(
-      new PolicyStatement({
-        actions: ["s3:*"],
-        resources: [bucket.bucketArn],
-      })
-    );
-
     const dmsSG = new SecurityGroup(
       this,
       `earthyp-dms-sg-${this.account}-${this.region}`,
@@ -90,10 +77,10 @@ export class MigrationStack extends Stack {
     // dms replication instance
     const replicationInstance = new CfnReplicationInstance(
       this,
-      `earthyp-replication-inst-${this.account}-${this.region}`,
+      `replication-inst-${this.account}-${this.region}`,
       {
         replicationInstanceClass: "dms.t3.micro",
-        replicationInstanceIdentifier: `replication-inst-${this.account}-${this.region}`,
+        replicationInstanceIdentifier: `replication-inst-${this.account}`,
         allocatedStorage: 50,
         engineVersion: "3.6.1",
         multiAz: false,
