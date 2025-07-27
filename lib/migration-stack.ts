@@ -137,7 +137,7 @@ export class MigrationStack extends Stack {
         engineName: "postgres",
         port: 5432,
         postgreSqlSettings: {
-          secretsManagerAccessRoleArn: "secretsManagerAccessRoleArn",
+          secretsManagerAccessRoleArn: secretsRole.roleArn,
           secretsManagerSecretId: secret.secretFullArn!,
         },
       }
