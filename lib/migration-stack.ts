@@ -74,7 +74,7 @@ export class MigrationStack extends Stack {
       this,
       `repl-inst-${this.account}-${this.region}`,
       {
-        replicationInstanceClass: "dms.t3.micro",
+        replicationInstanceClass: "dms.t3.small",
         replicationInstanceIdentifier: `replication-inst-${this.account}`,
         allocatedStorage: 50,
         engineVersion: "3.6.1",
@@ -85,8 +85,6 @@ export class MigrationStack extends Stack {
           replicationSubnetGroup.replicationSubnetGroupIdentifier,
       }
     );
-
-    replicationInstance.addDependency(replicationSubnetGroup);
 
     Tags.of(replicationInstance).add(
       "Name",
