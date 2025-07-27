@@ -16,6 +16,7 @@ import {
   PostgresEngineVersion,
   SnapshotCredentials,
 } from "aws-cdk-lib/aws-rds";
+import { Secret } from "aws-cdk-lib/aws-secretsmanager";
 import { Construct } from "constructs";
 
 interface dbProps extends StackProps {
@@ -30,11 +31,13 @@ const engine = DatabaseInstanceEngine.postgres({
 const snapshotIdentifier =
   "arn:aws:rds:us-east-1:742383987475:snapshot:finalsnapshot-111023";
 const existingUsername = "mapappadmin";
+const DB_NAME = "mapappadmin";
 
 export class DatabaseStack extends Stack {
-  readonly db: IDatabaseInstance;
+  readonly db: DatabaseInstanceFromSnapshot;
   readonly dbSG: SecurityGroup;
   readonly dbCredentials: SnapshotCredentials;
+  readonly dbName: string;
 
   constructor(scope: Construct, id: string, props: dbProps) {
     super(scope, id, props);
@@ -45,6 +48,8 @@ export class DatabaseStack extends Stack {
       existingUsername,
       { encryptionKey: kmsKey, excludeCharacters: "!&*^#@()" }
     );
+
+    this.dbName = DB_NAME;
 
     this.dbSG = new SecurityGroup(this, `mapsterious-db-sg-${this.account}`, {
       vpc: props!.vpc,
