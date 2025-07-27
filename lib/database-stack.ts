@@ -46,7 +46,7 @@ export class DatabaseStack extends Stack {
 
     this.dbCredentials = SnapshotCredentials.fromGeneratedSecret(
       existingUsername,
-      { encryptionKey: kmsKey, excludeCharacters: "!&*^#@()" }
+      { encryptionKey: kmsKey }
     );
 
     this.dbName = DB_NAME;
