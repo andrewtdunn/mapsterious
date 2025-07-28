@@ -46,24 +46,14 @@ export class StorageStack extends Stack {
           },
         ],
         vpc: props.vpc,
-        nodeToNodeEncryption: true,
-        enforceHttps: true,
+        nodeToNodeEncryption: false,
+        enforceHttps: false,
         encryptionAtRest: {
-          enabled: true,
-          kmsKey: new Key(
-            this,
-            `mapsterious-opensearch-kms-key-${this.account}`,
-            {
-              enableKeyRotation: true,
-            }
-          ),
+          enabled: false,
         },
         ebs: {
           volumeSize: 10,
           volumeType: EbsDeviceVolumeType.GENERAL_PURPOSE_SSD_GP3,
-        },
-        fineGrainedAccessControl: {
-          masterUserName: "mapsterious_admin",
         },
         capacity: {
           dataNodeInstanceType: "t3.small.search",
