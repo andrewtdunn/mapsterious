@@ -114,11 +114,14 @@ export class MigrationStack extends Stack {
         endpointType: "source",
         engineName: "postgres",
         port: 5432,
+        databaseName: "mappappadmin",
         postgreSqlSettings: {
           secretsManagerAccessRoleArn: secretsRole.roleArn,
           secretsManagerSecretId: db.secret!.secretName,
         },
       }
     );
+
+    props.databaseSG.addIngressRule(dmsSG, Port.tcp(5432), "postgres");
   }
 }
