@@ -95,12 +95,6 @@ export class MigrationStack extends Stack {
       `replication-instance-${this.account}`
     );
 
-    const secret = Secret.fromSecretCompleteArn(
-      this,
-      `secretRef-${this.account}`,
-      db.secret!.secretFullArn!
-    );
-
     const secretsRole = new Role(this, `secrets-role-${this.account}`, {
       assumedBy: new ServicePrincipal("dms.amazonaws.com"),
     });
@@ -108,7 +102,7 @@ export class MigrationStack extends Stack {
     secretsRole.addToPolicy(
       new PolicyStatement({
         actions: ["secretsmanager:GetSecretValue"],
-        resources: [secret.secretFullArn!],
+        resources: [db.secret!.secretFullArn!],
       })
     );
 
@@ -122,7 +116,7 @@ export class MigrationStack extends Stack {
         port: 5432,
         postgreSqlSettings: {
           secretsManagerAccessRoleArn: secretsRole.roleArn,
-          secretsManagerSecretId: secret.secretName,
+          secretsManagerSecretId: db.secret!.secretFullArn!,
         },
       }
     );
