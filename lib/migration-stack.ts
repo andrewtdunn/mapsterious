@@ -70,7 +70,7 @@ export class MigrationStack extends Stack {
         replicationSubnetGroupIdentifier: "replication-subnet-gp-id",
       }
     );
-
+    /*
     // dms replication instance
     const replicationInstance = new CfnReplicationInstance(
       this,
@@ -126,5 +126,6 @@ export class MigrationStack extends Stack {
         },
       }
     );
+    */
   }
 }
