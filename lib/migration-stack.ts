@@ -57,6 +57,7 @@ export class MigrationStack extends Stack {
     dmsSG.addIngressRule(Peer.anyIpv4(), Port.HTTPS, "https");
     dmsSG.addIngressRule(Peer.anyIpv4(), Port.tcp(9200), "opensearch");
     dmsSG.addIngressRule(Peer.anyIpv4(), Port.tcp(5601), "kibana");
+    dmsSG.addIngressRule(Peer.anyIpv4(), Port.tcp(5432), "postgres");
 
     const replicationSubnetGroup = new CfnReplicationSubnetGroup(
       this,
@@ -66,6 +67,7 @@ export class MigrationStack extends Stack {
           subnetType: SubnetType.PUBLIC,
         }).subnetIds,
         replicationSubnetGroupDescription: "replication subnet group",
+        replicationSubnetGroupIdentifier: "replication-subnet-gp-id",
       }
     );
 
@@ -85,6 +87,8 @@ export class MigrationStack extends Stack {
           replicationSubnetGroup.replicationSubnetGroupIdentifier,
       }
     );
+
+    replicationInstance.addDependency(replicationSubnetGroup);
 
     Tags.of(replicationInstance).add(
       "Name",
