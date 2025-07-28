@@ -88,8 +88,6 @@ export class MigrationStack extends Stack {
       }
     );
 
-    replicationInstance.addDependency(replicationSubnetGroup);
-
     Tags.of(replicationInstance).add(
       "Name",
       `replication-instance-${this.account}`
@@ -105,7 +103,7 @@ export class MigrationStack extends Stack {
         resources: [db.secret!.secretFullArn!],
       })
     );
-
+    /*
     // postgres endpoint
     const pgEndpoint = new CfnEndpoint(
       this,
@@ -123,5 +121,6 @@ export class MigrationStack extends Stack {
     );
 
     props.databaseSG.addIngressRule(dmsSG, Port.tcp(5432), "postgres");
+    */
   }
 }
