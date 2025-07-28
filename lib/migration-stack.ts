@@ -111,8 +111,8 @@ export class MigrationStack extends Stack {
         resources: [secret.secretFullArn!],
       })
     );
-    /*
-    // sqlserver endpoint
+
+    // postgres endpoint
     const pgEndpoint = new CfnEndpoint(
       this,
       `pgEndpoint-${this.account}-${this.region}`,
@@ -126,6 +126,5 @@ export class MigrationStack extends Stack {
         },
       }
     );
-    */
   }
 }
