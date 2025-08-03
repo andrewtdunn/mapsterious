@@ -1,0 +1,9 @@
+curl -XGET "https://vpc-mapsterious-dg54xtfeewzk5uo6vhq5dateqq.us-east-1.es.amazonaws.com/location/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "match": {
+      "label": "Chelsea"
+    }
+  } 
+}
+'

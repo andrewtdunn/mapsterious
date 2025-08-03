@@ -15,22 +15,22 @@ export class MapsteriousStage extends cdk.Stage {
       description: "Contains custom VPC.",
     });
 
-    const computeStack = new ComputeStack(
-      this,
-      `Compute-Stack-${this.account}`,
-      {
-        vpc: vpcStack.vpc,
-        env: props?.env,
-        description: "Contains Jumpbox and security groups.",
-      }
-    );
+    // const computeStack = new ComputeStack(
+    //   this,
+    //   `Compute-Stack-${this.account}`,
+    //   {
+    //     vpc: vpcStack.vpc,
+    //     env: props?.env,
+    //     description: "Contains Jumpbox and security groups.",
+    //   }
+    // );
 
-    const dbStack = new DatabaseStack(this, `Database-Stack-${this.account}`, {
-      vpc: vpcStack.vpc,
-      env: props?.env,
-      jumpboxSG: computeStack.jumpboxSG,
-      description: "Contains database and security groups.",
-    });
+    // const dbStack = new DatabaseStack(this, `Database-Stack-${this.account}`, {
+    //   vpc: vpcStack.vpc,
+    //   env: props?.env,
+    //   jumpboxSG: computeStack.jumpboxSG,
+    //   description: "Contains database and security groups.",
+    // });
 
     const storageStack = new StorageStack(
       this,
@@ -42,17 +42,17 @@ export class MapsteriousStage extends cdk.Stage {
       }
     );
 
-    const migrationStack = new MigrationStack(
-      this,
-      `Migration-Stack-${this.account}`,
-      {
-        vpc: vpcStack.vpc,
-        database: dbStack.db,
-        jumpboxSG: computeStack.jumpboxSG,
-        description: "Contains DMS instance and migration task.",
-        openSearchDomain: storageStack.openSearchDomain,
-        databaseSG: dbStack.dbSG,
-      }
-    );
+    // const migrationStack = new MigrationStack(
+    //   this,
+    //   `Migration-Stack-${this.account}`,
+    //   {
+    //     vpc: vpcStack.vpc,
+    //     database: dbStack.db,
+    //     jumpboxSG: computeStack.jumpboxSG,
+    //     description: "Contains DMS instance and migration task.",
+    //     openSearchDomain: storageStack.openSearchDomain,
+    //     databaseSG: dbStack.dbSG,
+    //   }
+    // );
   }
 }
