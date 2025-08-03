@@ -9,7 +9,7 @@ const PROD_ACCOUNT = "471112703167";
 const PROD_REGION = "us-east-1";
 
 const GITHUB_ACCT = "andrewtdunn";
-const GITHUB_REPO = "mapsterious";
+const GITHUB_REPO = "mapsterious_infra";
 const GITHUB_BRANCH = "main";
 
 const connectionArn =
